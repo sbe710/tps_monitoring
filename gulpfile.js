@@ -3,6 +3,7 @@ let gulp = require('gulp'),
     prefixer = require('gulp-autoprefixer'),
     plumber = require('gulp-plumber'),
     watch = require('gulp-watch'),
+    webpackStream = require('webpack-stream'),
     bs = require('browser-sync'),
     rimraf = require('rimraf'),
     path = {
@@ -67,6 +68,24 @@ gulp.task('less:build', function() {
 
 gulp.task('js:build', function() {
     gulp.src(path.src.js)
+        .pipe(webpackStream({
+            output: {
+                filename: 'main.js',
+            },
+            mode: 'development',
+            module: {
+                rules: [
+                    {
+                        test: /\.(js)$/,
+                        exclude: /(node_modules)/,
+                        loader: 'babel-loader',
+                        query: {
+                            presets: ['env']
+                        }
+                    }
+                ]
+            }
+        }))
         .pipe(plumber())
         .pipe(gulp.dest(path.dist.js))
         .pipe(bs.stream())
