@@ -11,25 +11,22 @@ let gulp = require('gulp'),
             js: 'dist/js/',
             css: 'dist/css/',
             img: 'dist/img/',
-            fonts: 'dist/fonts/',
         },
         src: {
             html: 'src/template/*.html',
             js: 'src/js/[^_]*.js',
             less: 'src/less/*.less',
             img: 'src/img/*.*',
-            fonts: 'src/fonts/**/*.*',
         },
         watch: {
             html: 'src/template/**/*.html',
             js: 'src/js/**/*.js',
             less: 'src/less/**/*.less',
             img: 'src/img/*.*',
-            fonts: 'src/fonts/**/*.*',
         },
         clean: './dist',
         outputDir: './dist'
-};
+    };
 
 gulp.task('server', ['watch'], function() {
     bs.init({
@@ -75,16 +72,9 @@ gulp.task('js:build', function() {
         .pipe(bs.stream())
 });
 
-gulp.task('fonts:build', function() {
-    gulp.src(path.src.fonts)
-        .pipe(gulp.dest(path.dist.fonts))
-        .pipe(bs.stream())
-});
-
 gulp.task('build', [
     'html:build',
     'js:build',
-    'fonts:build',
     'less:build',
 ]);
 
