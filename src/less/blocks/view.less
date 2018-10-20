@@ -1,0 +1,24 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__window {
+    width: @view-image-width;
+    height: @view-image-height;
+    margin: 10px 0;
+    position: relative;
+    background-color: lightblue;
+  }
+
+  &__info {
+    display: none;
+    transition: 5s ease;
+    margin: 5px;
+
+    &:hover {
+      background-color: red;
+      transition: 5s ease;
+    }
+  }
+}
