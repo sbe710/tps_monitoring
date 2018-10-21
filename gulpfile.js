@@ -6,7 +6,8 @@ let gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     cssmin = require('gulp-minify-css'),
     sourcemaps = require('gulp-sourcemaps'),
-    rename = require("gulp-rename"),
+    rename = require('gulp-rename'),
+    nodemon = require('gulp-nodemon'),
     webpackStream = require('webpack-stream'),
     bs = require('browser-sync'),
     rimraf = require('rimraf'),
@@ -22,6 +23,7 @@ let gulp = require('gulp'),
             js: 'src/public/js/[^_]*.js',
             less: 'src/public/less/*.less',
             img: 'src/public/img/*.*',
+            app: 'src/server/app.js',
         },
         watch: {
             html: 'src/public/template/**/*.html',
@@ -33,13 +35,23 @@ let gulp = require('gulp'),
         outputDir: './public/dist'
     };
 
-gulp.task('server', ['watch'], function() {
-    bs.init({
-        server: {
-            baseDir: path.outputDir,
-        },
+gulp.task('server', ['watch', 'nodemon'], function() {
+    bs.init(null, {
+        proxy: "http://localhost:5000",
+        port: 7000,
         notify: false,
     });
+});
+
+gulp.task('nodemon', function(cb) {
+    let started = false;
+    return nodemon({ script: path.src.app })
+        .on('start', function() {
+            if (!started) {
+                cb();
+                started = true;
+            }
+        });
 });
 
 gulp.task('watch', function() {
