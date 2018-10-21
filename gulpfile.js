@@ -77,12 +77,12 @@ gulp.task('html:build', function() {
 
 gulp.task('less:build', function() {
     return gulp.src(path.src.less)
+        .pipe(plumber())
         .pipe(less())
         .pipe(sourcemaps.init())
         .pipe(prefixer({
             browsers: ['last 3 version', "> 1%", "ie 8", "ie 7"]
         }))
-        .pipe(plumber())
         .pipe(cssmin())
         .pipe(sourcemaps.write())
         .pipe(rename({suffix: '.min'}))
