@@ -10,6 +10,10 @@
     margin-bottom: 10px;
     position: relative;
     background-color: lightblue;
+
+    @media @mobile  {
+      width: 100%;
+    }
   }
 
   &__info {
@@ -21,5 +25,9 @@
       background-color: red;
       transition: 5s ease;
     }
+  }
+
+  @media @mobile  {
+    padding-top: 0;
   }
 }
