@@ -1,0 +1,41 @@
+.notice {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  border-radius: 5px;
+  animation: movein 2s ease;
+  animation-fill-mode: forwards;
+
+  &::before {
+    display: block;
+    content: '';
+    width: 25px;
+    height: 23px;
+    margin: 0 15px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  &__content {
+    padding: 35px 40px 35px 40px;
+
+    @media @mobile {
+      padding: 25px 20px 25px 20px;
+    }
+  }
+
+  &._error {
+    background: @red-ff;
+
+    &::before {
+      background-image: url('../../img/attention-red_icon.svg');
+    }
+  }
+}
+
+@keyframes movein {
+  to { transform: translateY(20px); }
+}
