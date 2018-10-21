@@ -12,25 +12,25 @@ let gulp = require('gulp'),
     rimraf = require('rimraf'),
     path = {
         dist: {
-            html: 'dist/',
-            js: 'dist/js/',
-            css: 'dist/css/',
-            img: 'dist/img/',
+            html: 'dist/public',
+            js: 'dist/public/js/',
+            css: 'dist/public/css/',
+            img: 'dist/public/img/',
         },
         src: {
-            html: 'src/template/*.html',
-            js: 'src/js/[^_]*.js',
-            less: 'src/less/*.less',
-            img: 'src/img/*.*',
+            html: 'src/public/template/*.html',
+            js: 'src/public/js/[^_]*.js',
+            less: 'src/public/less/*.less',
+            img: 'src/public/img/*.*',
         },
         watch: {
-            html: 'src/template/**/*.html',
-            js: 'src/js/**/*.js',
-            less: 'src/less/**/*.less',
-            img: 'src/img/*.*',
+            html: 'src/public/template/**/*.html',
+            js: 'src/public/js/**/*.js',
+            less: 'src/public/less/**/*.less',
+            img: 'src/public/img/*.*',
         },
         clean: './dist',
-        outputDir: './dist'
+        outputDir: './public/dist'
     };
 
 gulp.task('server', ['watch'], function() {
