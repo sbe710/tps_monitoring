@@ -3,6 +3,10 @@ let gulp = require('gulp'),
     prefixer = require('gulp-autoprefixer'),
     plumber = require('gulp-plumber'),
     watch = require('gulp-watch'),
+    uglify = require('gulp-uglify'),
+    cssmin = require('gulp-minify-css'),
+    sourcemaps = require('gulp-sourcemaps'),
+    rename = require("gulp-rename"),
     webpackStream = require('webpack-stream'),
     bs = require('browser-sync'),
     rimraf = require('rimraf'),
@@ -48,6 +52,9 @@ gulp.task('watch', function() {
     watch([path.watch.js], function() {
         gulp.start('js:build');
     });
+    watch([path.watch.img], function() {
+        gulp.start('img:build');
+    });
 });
 
 gulp.task('html:build', function() {
@@ -59,9 +66,14 @@ gulp.task('html:build', function() {
 gulp.task('less:build', function() {
     return gulp.src(path.src.less)
         .pipe(less())
+        .pipe(sourcemaps.init())
         .pipe(prefixer({
             browsers: ['last 3 version', "> 1%", "ie 8", "ie 7"]
         }))
+        .pipe(plumber())
+        .pipe(cssmin())
+        .pipe(sourcemaps.write())
+        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(path.dist.css))
         .pipe(bs.stream())
 });
@@ -87,7 +99,17 @@ gulp.task('js:build', function() {
             }
         }))
         .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(path.dist.js))
+        .pipe(bs.stream())
+});
+
+gulp.task('img:build', function() {
+    gulp.src(path.src.img)
+        .pipe(gulp.dest(path.dist.img))
         .pipe(bs.stream())
 });
 
@@ -95,6 +117,7 @@ gulp.task('build', [
     'html:build',
     'js:build',
     'less:build',
+    'img:build'
 ]);
 
 gulp.task('clean', function(cb) {
