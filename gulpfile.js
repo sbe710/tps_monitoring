@@ -102,9 +102,11 @@ gulp.task('js:build', function() {
                     {
                         test: /\.(js)$/,
                         exclude: /(node_modules)/,
-                        loader: 'babel-loader',
-                        query: {
-                            presets: ['env']
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: ['@babel/preset-env']
+                            }
                         }
                     }
                 ]
