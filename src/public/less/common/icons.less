@@ -1,0 +1,28 @@
+.icon {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  vertical-align: center;
+  cursor: pointer;
+  opacity: 0.5;
+
+  &&-expand {
+    position: absolute;
+    right: 40px;
+    bottom: 30px;
+    width: 20px;
+    height: 20px;
+    background: url('../../img/expand.svg') no-repeat;
+    transition: 0.3s all ease-in-out;
+
+    &:hover {
+      transform: scale(1.17, 1.17);
+      opacity: 1;
+    }
+
+    @media @mobile {
+      bottom: calc((100% - 80%) / 2);
+    }
+  }
+}
