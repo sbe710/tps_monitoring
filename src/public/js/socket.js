@@ -1,6 +1,8 @@
 import $ from "jquery";
+
 function socketConnect() {
-    var socket = new WebSocket("ws://192.168.0.101:5000/worker");
+    $('.loader').show();
+    let socket = new WebSocket("ws://192.168.0.101:5000/worker");
 
     socket.onmessage = function (event) {
         $('.view__info').show();
@@ -8,16 +10,11 @@ function socketConnect() {
         console.log(event)
     };
 
-    socket.onopen = function () {
-        alert('connected');
+    socket.onopen = function() {
+        // alert('connected');
         socket.send('connected')
-    };
-
-    document.forms.publish.onsubmit = function () {
-        var outgoingMessage = this.message.value;
-
-        socket.send(outgoingMessage);
-        return false;
+        $('.loader').hide();
+        $('.view__state').toggleClass('_green')
     };
 }
 

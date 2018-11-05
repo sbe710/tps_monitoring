@@ -1,0 +1,19 @@
+.state-diode(@color) {
+  animation: blink 6s linear infinite;
+  box-shadow: lighten(@color, 3%) 0 0 20px;
+
+  @keyframes blink {
+    0% {
+      background-color: @color;
+      opacity: 1;
+    }
+    50% {
+      background-color: @color;
+      opacity: 0;
+    }
+    100% {
+      background-color: @color;
+      opacity: 1;
+    }
+  }
+}
