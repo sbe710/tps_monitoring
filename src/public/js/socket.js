@@ -1,4 +1,5 @@
-import $ from "jquery";
+import $ from 'jquery';
+import { default as notice } from './notice_handler'
 
 function socketConnect() {
     $('.loader').show();
@@ -11,10 +12,10 @@ function socketConnect() {
     };
 
     socket.onopen = function() {
-        // alert('connected');
         socket.send('connected')
         $('.loader').hide();
-        $('.view__state').toggleClass('_green')
+        $('.content').append(notice.getTemplate('WS connection established', 'success'));
+        $('.view__state').toggleClass('_green');
     };
 }
 

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { default as notice } from './notice_handler';
 
 function buttonHandler() {
     const Url = 'https://jsonplaceholder.typicode.com/posts';
@@ -13,7 +14,7 @@ function buttonHandler() {
                 $('.view__info').text(result[0].title);
             },
             error: function(error) {
-                $('.content').append('<div class="notice _error"><div class="notice__content">ERROR ${error}</div></div>')
+                $('.content').append(notice.getTemplate('AJAX error', 'error'));
                 console.log(`Error ${error}`)
             }
         });
@@ -24,7 +25,7 @@ function buttonHandler() {
     });
 
     $('.button._notice').click(() => {
-        $('.content').append('<div class="notice _error"><div class="notice__content">ERROR</div></div>')
+        $('.content').append(notice.getTemplate('Error click', 'error'));
     })
 }
 

@@ -2,12 +2,13 @@
   display: flex;
   align-items: center;
   position: absolute;
-  top: 0;
+  top: -70px;
   left: 5%;
   width: 90%;
   border-radius: 5px;
-  animation: movein 2s ease;
+  animation: movein .3s ease-in-out;
   animation-fill-mode: forwards;
+  z-index: 10;
 
   &::before {
     display: block;
@@ -34,8 +35,18 @@
       background-image: url('../../img/attention-red_icon.svg');
     }
   }
+
+  &._success {
+    background: @green-f8;
+
+    &::before {
+      width: 30px;
+      margin-top: -6px;
+      background-image: url('../../img/check-green_icon.svg');
+    }
+  }
 }
 
 @keyframes movein {
-  to { transform: translateY(20px); }
+  to { transform: translateY(90px); }
 }
